@@ -1,0 +1,22 @@
+<aura:component controller="ClassController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <ltng:require styles="/resource/BootstrapNamespaced"/>
+    <!-- Handle component initialization in a client-side controller --> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <!-- Dynamically load the list of contacts -->
+    <aura:attribute name="selectedClassId" type="String"/>
+    <aura:attribute name="classes" type="Class__c[]"/>
+    <hr />
+    <div class="bootstrap-sf1 container">
+        <aura:iteration var="class" items="{!v.classes}" >
+            <div class="bootstrap-sf1 row">
+            <a>
+                <div id="{!class.Id}" class="bootstrap-sf1 col-xs-12" onclick="{!c.onClick}">
+                	<h4 id="{!class.Id}" class="bootstrap-sf1 text-center">{!class.Name}</h4>
+                </div>
+            </a>
+        	</div>
+            <hr />
+        </aura:iteration>
+    </div>
+    <aura:if isTrue="{!false}"><c:SessionList classId="{!selectedClassId}"/></aura:if>
+</aura:component>

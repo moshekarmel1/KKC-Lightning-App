@@ -1,0 +1,30 @@
+<aura:component controller="SessionController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <ltng:require styles="/resource/BootstrapNamespaced"/>
+    <aura:attribute name="classId" type="String"/>
+    <!-- Handle component initialization in a client-side controller --> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <!-- Dynamically load the list of contacts -->
+    <aura:attribute name="sessions" type="Session__c[]"/>
+    <hr />
+    <div class="bootstrap-sf1 container-fluid">
+        <div class="bootstrap-sf1 row">
+            <a>
+                <div id="createNew" class="bootstrap-sf1 col-xs-12" onclick="{!c.onClick}">
+                    <h4 id="createNew" class="bootstrap-sf1 text-center">Create New</h4>
+                </div>
+            </a>
+        </div>
+        <hr />
+        <aura:iteration var="session" items="{!v.sessions}" >
+            <div class="bootstrap-sf1 row">
+                <a>
+                    <div id="{!session.Id}" class="bootstrap-sf1 col-xs-12" onclick="{!c.onClick}">
+                        <h4 id="{!session.Id}" class="bootstrap-sf1 text-center">{!session.Date__c}</h4>
+                    </div>
+                </a>
+            </div>
+            <hr />
+        </aura:iteration>
+    </div>
+    <aura:if isTrue="{!false}"><c:EnrolleeList classId="{!classId}"/></aura:if>
+</aura:component>

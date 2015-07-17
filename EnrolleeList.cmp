@@ -1,0 +1,42 @@
+<aura:component controller="AttendeeController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <ltng:require scripts="/resource/jQuery, /resource/BootstrapJS, /resource/jQueryUI" 
+                  styles="/resource/BootstrapNamespaced, /resource/jQueryCSS" 
+                  afterScriptsLoaded="{!c.doScriptLoad}"/>
+    <aura:attribute name="classId" type="String"/>
+    <aura:attribute name="sessionId" type="String"/> 
+    <aura:attribute name="enrollees" type="Enrollee__c[]"/>
+    <aura:attribute name="success" type="Boolean"/> 
+    <!-- Handle component initialization in a client-side controller --> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <!-- Fixed navbar -->
+    <nav class="bootstrap-sf1 navbar navbar-default navbar-fixed-top">
+      <div class="bootstrap-sf1 container">
+        <div class="bootstrap-sf1 navbar-header">
+          <a class="bootstrap-sf1 navbar-brand" href="#">KKC Classes</a>
+          <button class="bootstrap-sf1 navbar-brand btn btn-primary btn-sm pull-right" onclick="{!c.saveStuff}">Save</button>
+        </div>
+      </div>
+    </nav>
+    <!-- Iterate over the list of enrollees and display them -->
+    <div class="bootstrap-sf1 container">
+        <aura:iteration var="enrollee" items="{!v.enrollees}" >
+            <div class="bootstrap-sf1 row">
+                <div class="bootstrap-sf1 col-xs-12">
+                    <button id="{!enrollee.Student__c}" class="bootstrap-sf1 btn btn-default btn-lg btn-block" 
+                            onclick="{!c.onClick}">{!enrollee.Student__r.Name}</button>
+                </div>
+            </div>
+            <div id="{!'div' + enrollee.Student__c}" class="bootstrap-sf1 row hidden">
+                <div class="bootstrap-sf1 col-xs-6">
+                    <label class="Before">Before : 5</label>
+                    <div class="slider"></div>
+                </div>
+                <div class="bootstrap-sf1 col-xs-6">
+                    <label class="After">After : 5</label>
+                    <div class="slider"></div>
+                </div>
+            </div>
+            <br />
+        </aura:iteration>
+    </div>
+</aura:component>
