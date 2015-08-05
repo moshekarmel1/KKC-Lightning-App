@@ -1,8 +1,10 @@
 ({
     doInit : function(component, event, helper) {
-    	helper.getEnrollees(component);
+        console.log("Doing Init....");
+        helper.getEnrollees(component);
     },
     setupSliders : function(){
+        console.log("Sliders getting set....");
         $(".slider").each(function(){
             var parent = $(this).parent();
             var label = parent.find("label");
@@ -10,7 +12,7 @@
                 orientation: "horizontal",
                 range: "min",
                 max: 10,
-                value: 5,
+                value: 0,
                 slide : function(event, ui){
                     if(label){
                         var prefix = label[0].className;
@@ -21,15 +23,19 @@
         });
     },
     doScriptLoad : function(component, event, helper) {
+        console.log("Scripts Loaded....");
         var action = component.get("c.setupSliders");
         $A.enqueueAction(action);
+        setTimeout(function(){//wait a half second bec of loading issues...
+            console.log("Half a second later....");
+            $A.enqueueAction(action);
+        }, 500);
     },
-	onClick : function(component, event, helper) { 
+    onClick : function(component, event, helper) { 
         var id = event.target.id;
-        console.log(id);
         $('#' + id).toggleClass('btn-success');
         $('#div' + id).toggleClass('hidden');
-	},
+    },
     saveStuff : function(component, event, helper) {
         var obj = {};
         var iterator = 0;
@@ -49,5 +55,5 @@
             iterator++;
         });
         helper.saveAttendees(component, obj);
-	},
+    },
 })

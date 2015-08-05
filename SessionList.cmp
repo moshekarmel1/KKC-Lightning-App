@@ -1,17 +1,37 @@
 <aura:component controller="SessionController" implements="force:appHostable,flexipage:availableForAllPageTypes">
     <ltng:require styles="/resource/BootstrapNamespaced"/>
     <aura:attribute name="classId" type="String"/>
+    <aura:attribute name="className" type="String"/>
     <!-- Handle component initialization in a client-side controller --> 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
     <!-- Dynamically load the list of contacts -->
     <aura:attribute name="sessions" type="Session__c[]"/>
+    <header class="uiBlock oneAnchorHeader">
+        <div class="bLeft">
+            <div class="small forceEntityIcon" style="background-color: #df6184;">
+                <span class="uiImage">
+                    <img src="https://cs8.salesforce.com/img/icon/t4v32/custom/custom13_120.png" class="icon " alt="" title=""></img>
+                </span>
+            </div>
+        </div>
+        <div class="bRight">
+        </div>
+        <div class="bBody">
+            <h2 class="truncate">{!v.className}</h2>
+        </div>
+    </header>
     <hr />
     <div class="bootstrap-sf1 container-fluid">
         <div class="bootstrap-sf1 row">
             <a>
-                <div id="createNew" class="bootstrap-sf1 col-xs-12" onclick="{!c.onClick}">
-                    <h4 id="createNew" class="bootstrap-sf1 text-center">Create New</h4>
+                <div class="bootstrap-sf1 col-xs-4">
+                    
                 </div>
+                <div id="createNew" class="bootstrap-sf1 col-xs-12">
+                    <ui:inputDate aura:id="date" class="bootstrap-sf1 form-control input-md" format="M/d/yyyy" label="Session Date" displayDatePicker="true" />
+                    <h4 id="createNew" class="bootstrap-sf1 text-center" onclick="{!c.onClick}">Create New</h4>
+                </div>
+                
             </a>
         </div>
         <hr />
